@@ -1,0 +1,27 @@
+---
+- name: Import Microsoft GPG key for Visual Studio Code
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+  become: true
+
+- name: Add Visual Studio Code repository
+  ansible.builtin.yum_repository:
+    name: code
+    description: Visual Studio Code Repository
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+  become: true
+
+- name: Update DNF package cache
+  ansible.builtin.dnf:
+    update_cache: true
+  become: true
+
+- name: Install Visual Studio Code
+  ansible.builtin.dnf:
+    name: code
+    state: present
+  become: true

@@ -1,0 +1,41 @@
+---
+- name: Check if libvirt module works by listing all VMs
+  become: true
+  community.libvirt.virt:
+    command: list_vms
+  ignore_errors: true
+  register: result
+
+- block:
+  - name: Ensure system dependencies for libvirt-python are installed
+    become: true
+    ansible.builtin.dnf:
+      name:
+        - libvirt-devel
+        - pkgconfig
+        - gcc
+        - python3-devel
+      state: present
+
+  - name: Ensure required libvirt Python modules are installed on Fedora
+    become: true
+    ansible.builtin.dnf:
+      name:
+        - python3-libvirt
+        - python3-lxml
+      state: present
+
+  - name: Inject libvirt-python into ansible with pipx
+    ansible.builtin.command:
+      cmd: pipx inject ansible libvirt-python
+
+  - name: Inject lxml into ansible with pipx
+    ansible.builtin.command:
+      cmd: pipx inject ansible lxml
+  when: result.failed
+
+- name: Create VM from XML template
+  become: true
+  community.libvirt.virt:
+    command: define
+    xml: "{{ lookup('template', 'vm.xml.j2') }}"

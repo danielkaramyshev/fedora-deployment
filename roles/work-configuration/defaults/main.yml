@@ -1,0 +1,15 @@
+enable_eduvpn_installation: true
+remove_dnf_packages_work: []
+
+dnf_packages_work: 
+  - ansible-lint
+  - virt-manager
+  - virt-viewer
+  - keepassxc
+  - thunderbird
+
+enable_create_vm: false
+vm_name: win10
+# vm_disk_path: /var/lib/libvirt/images/win10.qcow2
+vm_disk_path: /home/daniel/thinclient_drives/G:/windoof/images/win10.qcow2
+

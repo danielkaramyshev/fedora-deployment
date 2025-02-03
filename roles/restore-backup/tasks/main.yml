@@ -1,0 +1,4 @@
+---
+- include_tasks: restore-backup.yml
+  tags: restore_backup
+  when: enable_restore_backup | default(false)

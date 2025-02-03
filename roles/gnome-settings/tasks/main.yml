@@ -1,0 +1,3 @@
+- include_tasks: install_extensions.yml
+  tags: gnome-extensions
+  when: enable_gnome_extensions | default(false)

@@ -1,0 +1,5 @@
+- include_tasks: zsh_ohmyzsh.yml
+  tags: zsh-installation
+
+- include_tasks: theme.yml
+  tags: zsh-theme

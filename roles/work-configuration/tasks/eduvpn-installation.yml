@@ -1,0 +1,30 @@
+- name: Download the eduVPN GPG key
+  ansible.builtin.get_url:
+    url: "https://app.eduvpn.org/linux/v4/rpm/app+linux@eduvpn.org.asc"
+    dest: "/tmp/app+linux@eduvpn.org.asc"
+    mode: "0644"
+
+- name: Import the eduVPN GPG key
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: "/tmp/app+linux@eduvpn.org.asc"
+
+- name: Create the eduVPN repository file
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/yum.repos.d/python-eduvpn-client_v4.repo
+    content: |
+      [python-eduvpn-client_v4]
+      name=eduVPN for Linux 4.x (Fedora $releasever)
+      baseurl=https://app.eduvpn.org/linux/v4/rpm/fedora-$releasever-$basearch
+      gpgcheck=1
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Install eduvpn-client package
+  become: true
+  ansible.builtin.dnf:
+    name: eduvpn-client
+    state: present

@@ -1,0 +1,50 @@
+enable_autoupdate: true
+enable_docker: true # Installs Docker CE
+
+remove_dnf_packages: 
+  - libcurl-minimal
+
+dnf_packages:
+  - libcurl
+  - gnome-tweaks
+  - adw-gtk3-theme
+  - curl
+  - git
+  - htop
+  - btop
+  - tmux
+  - wireguard-tools
+  - openssl
+  - nmap
+  - netcat
+  - rsync
+  - ncdu
+  - iotop
+  - nload
+  - zip
+  - unzip
+  - dnf-plugins-core
+  - firewall-config
+  - jq
+  - tcpdump
+  - wireshark
+  - iftop
+  - lsof
+  - bc
+  - remmina
+  - xclip
+
+  
+
+flatpak_packages:
+  - com.jgraph.drawio.desktop
+  - it.mijorus.gearlever
+  - com.mattjakeman.ExtensionManager
+  - com.spotify.Client
+  - md.obsidian.Obsidian
+  - net.nokyan.Resources
+  - one.ablaze.floorp
+  - org.ferdium.Ferdium
+  - tv.plex.PlexDesktop
+  - org.gnome.DejaDup
+  - org.gnome.seahorse.Application

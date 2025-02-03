@@ -1,0 +1,17 @@
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
+
+
+
+
+
+  vars:
+    enable_restore_backup: true
+    backup_pairs:
+      - { src: '/home/daniel/thinclient_drives/G:/bkp_usable/', dest: '/home/daniel/' }
+
+    delete_dirs:
+      - /home/daniel/.var/app/org.ferdium.Ferdium/config/Ferdium/Singleton*

@@ -1,0 +1,16 @@
+---
+- name: Restore backups fast using rsync
+  ansible.posix.synchronize:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    recursive: yes
+    rsync_opts:
+      - "--compress"  # enable compression for speed (optional)
+  loop: "{{ backup_pairs }}"
+  tags: restore-backups
+
+- name: Remove specified directories using rm -rf
+  become: true
+  ansible.builtin.shell: "rm -rf {{ item }}"
+  loop: "{{ delete_dirs | default([]) }}"
+  when: delete_dirs is defined and delete_dirs | length > 0

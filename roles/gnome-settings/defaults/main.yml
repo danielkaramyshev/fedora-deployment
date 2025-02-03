@@ -1,0 +1,72 @@
+enable_gnome_extensions: true
+
+gnome_user: "{{ ansible_env.USER }}"
+
+gnome_extensions:
+  - id: 3628 # ArcMenu
+    enable: true
+  - id: 1160 # Dash to Panel
+    enable: true
+  - id: 779 # Clipboard Indicator
+    enable: true
+  - id: 3193 # Blur My Shell
+    enable: true
+  - id: 1401 # Bluetooth Quick Connect
+    enable: true
+  - id: 3780 # DDterm
+    enable: true
+  - id: 1460 # Vitals
+    enable: true
+
+# dconf dump /
+gnome_dconf:
+  - key: /org/gnome/shell/extensions/vitals/hot-sensors
+    value: "['_processor_usage_', '_memory_usage_', '__temperature_avg__']"
+  - key: /org/gnome/desktop/privacy/report-technical-problems
+    value: false
+  - key: /org/gnome/desktop/interface/workspaces-only-on-primary
+    value: false
+  - key: /org/gnome/shell/extensions/arcmenu/arcmenu-hotkey
+    value: "['<Alt>Super_L']"
+  - key: /org/gnome/shell/extensions/arcmenu/menu-layout
+    value: "'Windows'"
+  - key: /org/gnome/shell/extensions/arcmenu/multi-monitor
+    value: true
+  - key: /org/gnome/shell/extensions/arcmenu/runner-hotkey
+    value: "['<Super>r']"
+  - key: /org/gnome/shell/extensions/arcmenu/runner-show-frequent-apps
+    value: true
+  - key: /org/gnome/shell/extensions/blur-my-shell/appfolder/brightness
+    value: '0.6'
+  - key: /org/gnome/shell/extensions/clipboard-indicator/toggle-menu
+    value: '["<Super>v"]'
+  - key: /org/gnome/shell/extensions/clipboard-indicator/clear-on-boot
+    value: true
+  - key: /org/gnome/shell/extensions/dash-to-panel/isolate-workspaces
+    value: true
+  - key: /org/gnome/desktop/interface/clock-show-date
+    value: true
+  - key: /org/gnome/desktop/interface/clock-show-seconds
+    value: true
+  - key: /org/gnome/desktop/interface/clock-show-weekday
+    value: true
+  - key: /org/gnome/shell/favorite-apps
+    value: "['vivaldi-stable.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop', 'virt-manager.desktop', 'net.thunderbird.Thunderbird.desktop', 'org.remmina.Remmina.desktop', 'remote-viewer.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.ferdium.Ferdium.desktop']"
+  - key: /org/gnome/shell/extensions/dash-to-panel/panel-element-positions
+    value: "'{\"0\": [{\"element\": \"showAppsButton\", \"visible\": false, \"position\": \"stackedTL\"}, {\"element\": \"activitiesButton\", \"visible\": false, \"position\": \"stackedTL\"}, {\"element\": \"leftBox\", \"visible\": true, \"position\": \"stackedTL\"}, {\"element\": \"taskbar\", \"visible\": true, \"position\": \"stackedTL\"}, {\"element\": \"centerBox\", \"visible\": true, \"position\": \"stackedBR\"}, {\"element\": \"rightBox\", \"visible\": true, \"position\": \"stackedBR\"}, {\"element\": \"dateMenu\", \"visible\": true, \"position\": \"stackedBR\"}, {\"element\": \"systemMenu\", \"visible\": true, \"position\": \"stackedBR\"}, {\"element\": \"desktopButton\", \"visible\": true, \"position\": \"stackedBR\"}]}'"
+
+
+# gsettings list-recursively 
+gnome_gsettings:
+  - schema: org.gnome.desktop.wm.preferences
+    key: button-layout
+    value: 'appmenu:minimize,maximize,close'
+  - schema: org.gnome.nautilus.preferences
+    key: date-time-format
+    value: 'detailed'
+  - schema: org.gnome.nautilus.preferences
+    key: default-folder-viewer
+    value: 'icon-view'
+  - schema: org.gnome.nautilus.preferences
+    key: search-filter-time-type
+    value: 'last_modified'

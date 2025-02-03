@@ -1,0 +1,23 @@
+---
+ohmyzsh_user: "{{ ansible_env.USER }}"
+
+ohmyzsh_plugins:
+  - git
+  - ansible
+  - docker
+  - ansible
+  - colorize
+  - command-not-found
+  - common-aliases
+  - copyfile
+  - copypath
+  - extract
+  - colored-man-pages
+  - sudo 
+  - vscode
+
+zsh_package_name: zsh
+
+install_theme: true
+theme_repo: https://github.com/romkatv/powerlevel10k.git
+theme_filename: powerlevel10k

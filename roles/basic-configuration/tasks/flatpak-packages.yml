@@ -1,0 +1,8 @@
+---
+- name: Install Flatpak applications
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+    remote: "{{ flatpak_remote | default('flathub') }}"
+  loop: "{{ flatpak_packages }}"
+  become: true

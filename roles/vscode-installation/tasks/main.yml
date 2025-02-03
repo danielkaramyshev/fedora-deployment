@@ -1,0 +1,7 @@
+- include_tasks: installation.yml
+  tags: vscode-installation
+
+- include_tasks: plugins.yml
+  tags: 
+    - vscode-installation
+    - vscode-plugins

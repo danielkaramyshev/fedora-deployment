@@ -1,0 +1,42 @@
+---
+- name: Install zsh package
+  ansible.builtin.package:
+    name: "{{ zsh_package_name }}"
+    state: present
+  become: true
+
+- name: Change default shell to zsh for user
+  ansible.builtin.user:
+    name: "{{ ohmyzsh_user }}"
+    shell: /bin/zsh
+  when: ansible_env.SHELL != '/bin/zsh'
+  become: true
+
+- name: Clone oh-my-zsh repository
+  ansible.builtin.git:
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+    dest: "/home/{{ ohmyzsh_user }}/.oh-my-zsh"
+    update: no
+  become_user: "{{ ohmyzsh_user }}"
+
+- name: Template .zshrc for oh-my-zsh
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: "/home/{{ ohmyzsh_user }}/.zshrc"
+    owner: "{{ ohmyzsh_user }}"
+    group: "{{ ohmyzsh_user }}"
+    mode: "0644"
+
+- name: Clone zsh-autosuggestions repository
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: "/home/{{ ohmyzsh_user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    update: no
+  become_user: "{{ ohmyzsh_user }}"
+
+- name: Clone zsh-syntax-highlighting repository
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "/home/{{ ohmyzsh_user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    update: no
+  become_user: "{{ ohmyzsh_user }}"

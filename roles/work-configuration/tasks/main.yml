@@ -1,0 +1,12 @@
+---
+- include_tasks: eduvpn-installation.yml
+  when: "ansible_os_family == 'RedHat' and enable_eduvpn_installation | default(false)"
+  tags: eduvpn-installation
+
+- include_tasks: dnf-packages.yml
+  when: "ansible_os_family == 'RedHat'"
+  tags: dnf-packages
+
+- include_tasks: vm.yml
+  when: enable_create_vm
+  tags: vm

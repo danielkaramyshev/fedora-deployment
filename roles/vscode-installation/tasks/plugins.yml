@@ -1,0 +1,8 @@
+---
+- name: Install VSCode extensions
+  ansible.builtin.shell: |
+    if ! code --list-extensions | grep -qx "{{ item }}"; then
+      code --install-extension {{ item }};
+    fi
+  loop: "{{ vscode_extensions }}"
+  become: false

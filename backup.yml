@@ -1,0 +1,36 @@
+---
+- name: Backup specified folders using rsync with full path
+  hosts: all
+  become: yes
+  vars:
+    backup_source_dirs:
+      - /home/daniel/.config/remmina
+      - /home/daniel/.config/vivaldi
+      - /home/daniel/.keepass
+      - /home/daniel/.local/share/remmina
+      - /home/daniel/.mozilla
+      - /home/daniel/.thunderbird
+      - /home/daniel/.var/app/org.ferdium.Ferdium
+      - /home/daniel/.var/app/tv.plex.PlexDesktop
+      - /home/daniel/.var/app/one.ablaze.floorp
+      - /home/daniel/.var/app/md.obsidian.Obsidian
+      - /home/daniel/.var/app/com.spotify.Client
+    backup_dest_dir: /home/daniel/Downloads/bkp
+  tasks:
+    - name: Ensure backup destination directory exists
+      ansible.builtin.file:
+        path: "{{ backup_dest_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Backup each specified folder using rsync with full path
+      ansible.posix.synchronize:
+        src: "{{ item }}"
+        dest: "{{ backup_dest_dir }}"
+        archive: yes
+        compress: yes
+        recursive: yes
+        times: yes
+        rsync_opts:
+          - "--relative"
+      loop: "{{ backup_source_dirs }}"

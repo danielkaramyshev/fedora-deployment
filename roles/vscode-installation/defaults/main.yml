@@ -1,0 +1,22 @@
+vscode_extensions:
+  - fabiospampinato.vscode-diff
+  - shardulm94.trailing-spaces
+  - emilast.LogFileHighlighter
+  - Compulim.compulim-vscode-closetag
+  - adrianwilczynski.format-selection-as-html
+  - oderwat.indent-rainbow
+  - christian-kohler.path-intellisense
+  - github.copilot
+  - ms-python.python
+  - ms-vscode-remote.remote-ssh
+  - redhat.ansible
+  - waderyan.gitblame
+  - mhutchie.git-graph
+  - donjayamanne.githistory
+  - eamodio.gitlens
+  - zainchen.json
+  - ms-azuretools.vscode-docker
+  - yzhang.markdown-all-in-one
+  - foxundermoon.shell-format
+  - mtxr.sqltools
+  - dotjoshjohnson.xml

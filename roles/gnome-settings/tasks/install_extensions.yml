@@ -1,0 +1,4 @@
+---
+- name: Include the GNOME customization role
+  include_role:
+    name: ex_customize-gnome

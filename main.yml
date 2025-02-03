@@ -1,0 +1,12 @@
+---
+- name: "Deployment"
+  hosts: localhost
+  connection: local
+  roles:
+    - role: basic-configuration
+    - role: gnome-settings
+    - role: vscode-installation
+    - role: vivaldi-browser
+    - role: zsh
+    - role: work-configuration
+    - role: restore-backup

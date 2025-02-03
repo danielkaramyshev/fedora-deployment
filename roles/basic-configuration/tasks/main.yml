@@ -1,0 +1,9 @@
+- include_tasks: dnf-packages.yml
+  tags: dnf-packages
+
+- include_tasks: flatpak-packages.yml
+  tags: flatpak-packages
+
+- include_tasks: docker.yml
+  tags: docker
+  when: enable_docker | default(false)

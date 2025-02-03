@@ -1,0 +1,55 @@
+---
+- name: Remove unwanted packages
+  ansible.builtin.dnf:
+    name: "{{ remove_dnf_packages }}"
+    state: absent
+  become: true
+
+- name: Update DNF package cache
+  ansible.builtin.dnf:
+    update_cache: true
+  become: true
+
+- name: Upgrade all installed packages
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+  become: true
+
+- name: Install additional packages
+  ansible.builtin.dnf:
+    name: "{{ dnf_packages }}"
+    state: present
+  become: true
+
+- block:
+    - name: Enable automatic updates
+      ansible.builtin.dnf:
+        name: dnf-automatic
+        state: present
+      become: true
+
+    - name: Start and enable automatic updates
+      ansible.builtin.service:
+        name: dnf-automatic.timer
+        state: started
+        enabled: true
+      become: true
+
+    - name: Start and enable automatic updates installer
+      ansible.builtin.service:
+        name: dnf-automatic.timer
+        state: started
+        enabled: true
+      become: true
+
+    - name: Configure automatic updates
+      ansible.builtin.copy:
+        src: dnf-automatic.conf
+        dest: /etc/dnf/automatic.conf
+        owner: root
+        group: root
+        mode: '0644'
+        backup: true
+      become: true
+  when: enable_autoupdate

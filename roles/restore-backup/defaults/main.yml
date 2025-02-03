@@ -1,0 +1,6 @@
+---
+enable_restore_backup: true
+
+backup_pairs: []
+  # - { src: '/backup/a', dest: '/restore/b' }
+  # - { src: '/backup/c', dest: '/restore/d' }

@@ -1,0 +1,25 @@
+---
+- name: Download Vivaldi RPM package
+  ansible.builtin.get_url:
+    url: "{{ vivaldi_rpm_package_url }}"
+    dest: "/tmp/vivaldi-stable.rpm"
+    mode: '0644'
+  become: true
+
+- name: Install Vivaldi browser from RPM
+  ansible.builtin.dnf:
+    name: "/tmp/vivaldi-stable.rpm"
+    state: present
+    disable_gpg_check: true
+  become: true
+
+- name: Update DNF package cache
+  ansible.builtin.dnf:
+    update_cache: true
+  become: true
+
+- name: Upgrade all installed packages to latest versions
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+  become: true
